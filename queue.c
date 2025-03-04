@@ -37,20 +37,17 @@ bool q_insert_head(struct list_head *head, char *s)
     if (!head)
         return false;
 
-    element_t *e = NULL;
-    if (!(e = malloc(sizeof(element_t))))
+    element_t *e = malloc(sizeof(element_t));
+    if (!e)
         return false;
 
-    INIT_LIST_HEAD(&e->list);
-    size_t len = strlen(s);
-    if (!(e->value = malloc(sizeof(char) * (len + 1)))) {
+    e->value = strdup(s);
+    if (!e->value) {
         free(e);
         return false;
     }
-    strncpy(e->value, s, len);
-    e->value[len] = '\0';
-    list_add(&e->list, head);
 
+    list_add(&e->list, head);
     return true;
 }
 
@@ -60,20 +57,17 @@ bool q_insert_tail(struct list_head *head, char *s)
     if (!head)
         return false;
 
-    element_t *e = NULL;
-    if (!(e = malloc(sizeof(element_t))))
+    element_t *e = malloc(sizeof(element_t));
+    if (!e)
         return false;
 
-    INIT_LIST_HEAD(&e->list);
-    size_t len = strlen(s);
-    if (!(e->value = malloc(sizeof(char) * (len + 1)))) {
+    e->value = strdup(s);
+    if (!e->value) {
         free(e);
         return false;
     }
-    strncpy(e->value, s, len);
-    e->value[len] = '\0';
-    list_add_tail(&e->list, head);
 
+    list_add_tail(&e->list, head);
     return true;
 }
 
